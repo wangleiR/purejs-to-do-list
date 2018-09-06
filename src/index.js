@@ -1,7 +1,7 @@
 import ActionButtons from './ActionButtons';
 import BarChart from './BarChart';
 import ToDoList from './ToDoList';
-import Model from './Model';
+import { Model }  from './Model';
 
 const startup = () => {
   const toDoListModel = new Model();
