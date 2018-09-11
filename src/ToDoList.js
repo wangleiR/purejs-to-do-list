@@ -1,10 +1,12 @@
-import { STATUS } from './Model';
+import { STATUS } from './Store';
 
 class ToDoList {
-  constructor(model) {
-    this.data = model.getData();
-    model.on('ON_ADD', this.render.bind(this));
-    model.on('ON_DELETE', this.render.bind(this));
+  constructor(store) {
+    this.store = store;
+      store.subscribe(() =>{
+          console.log(store.getState());
+          this.render(this.container);
+      })
   }
 
   render(container) {
@@ -12,7 +14,7 @@ class ToDoList {
       this.container = container;
     }
 
-    const rows = this.data.map(item => `<input value=${item.name} />
+    const rows = this.store.getState().map(item => `<input value=${item.name} />
         <select>
             <option value = ${item.status === STATUS.TODO ? 'selected' : "" }>${STATUS.TODO}</option>
             <option value = ${item.status === STATUS.FINISH ? 'selected' : "" }>${STATUS.FINISH}</option>

@@ -1,8 +1,9 @@
-import {STATUS} from "./Model";
+import {STATUS} from "./Store";
+import  { addItem,deleteItem } from './Action';
 
 class ActionButtons {
-  constructor(model) {
-      this.model = model;
+  constructor(store) {
+      this.store = store;
   }
 
   render(container) {
@@ -16,11 +17,11 @@ class ActionButtons {
     container.appendChild(deleteButton);
 
     addButton.addEventListener('click',() => {
-      this.model.appendData({name: 'Meeting4', status: STATUS.FINISH} );
+      this.store.dispatch(addItem('Meeting4',STATUS.FINISH));
     });
 
     deleteButton.addEventListener('click',() => {
-      this.model.deleteData();
+      this.store.dispatch(deleteItem("Meeting4"));
     });
 
   }

@@ -1,11 +1,17 @@
-import { STATUS } from './Model';
+import { STATUS } from './Store';
 
 class BarChart {
-  constructor(model) {
-    this.data = model.getData();
-    model.on('ON_ADD', this.render.bind(this));
-    model.on('ON_DELETE', this.render.bind(this));
-  }
+  // constructor(model) {
+  //   this.data = model.getData();
+  //   model.on('ON_ADD', this.render.bind(this));
+  //   model.on('ON_DELETE', this.render.bind(this));
+  // }
+    constructor(store) {
+        this.store = store;
+        store.subscribe(() =>{
+           this.render(this.container);
+        })
+    }
 
   render(container) {
     if (!this.container) {
@@ -15,7 +21,7 @@ class BarChart {
     let todoCount = 0;
     let blockedCount = 0;
 
-    this.data.forEach(item => {
+      this.store.getState().forEach(item => {
         if (item.status === STATUS.TODO){
           todoCount++;
         } else if(item.status === STATUS.BLOCKED){
