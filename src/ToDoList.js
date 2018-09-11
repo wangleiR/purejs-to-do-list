@@ -12,22 +12,12 @@ class ToDoList {
       this.container = container;
     }
 
-    const selectOptions = this.data.map(item => {
-        Object.keys(STATUS).forEach(it => {
-          if (STATUS[it] == item.status) {
-
-          }
-        })
-    });
-    
-    const rows = this.data.map(item => `<tr><td>${item.name}</td><td>
+    const rows = this.data.map(item => `<input value=${item.name} />
         <select>
-            <option selected>${item.status}</option>
-            <option>${STATUS.TODO}</option>
-            <option>${STATUS.FINISH}</option>
-            <option>${STATUS.BLOCKED}</option>
-        </select>
-        </td></tr>`);
+            <option value = ${item.status === STATUS.TODO ? 'selected' : "" }>${STATUS.TODO}</option>
+            <option value = ${item.status === STATUS.FINISH ? 'selected' : "" }>${STATUS.FINISH}</option>
+            <option value = ${item.status === STATUS.BLOCKED ? 'selected' : "" }>${STATUS.BLOCKED}</option>
+        </select><br>`).join("");
     this.container.innerHTML = `<table>${rows}</table>`;
   }
 }
